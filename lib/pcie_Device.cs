@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
 using System.Data;
@@ -18,14 +18,14 @@ namespace Jungo.pcie_lib
 {
     /* PCI diagnostics plug-and-play and power management events handler *
      * function type */
-    public delegate void USER_EVENT_CALLBACK(ref WD_EVENT pEvent, PCIE_Device dev);//¹¹Ôì·½·¨ÖØÔØ
+    public delegate void USER_EVENT_CALLBACK(ref WD_EVENT pEvent, PCIE_Device dev);//æ„é€ æ–¹æ³•é‡è½½
     /* PCI diagnostics interrupt handler function type */
     public delegate void USER_INTERRUPT_CALLBACK(PCIE_Device device);
 
 
     public class PCIE_Device
     {
-        private WDC_DEVICE m_wdcDevice = new WDC_DEVICE();   //¶¨ÒåÒ»¸öÄÚ²¿µÄwed_DEVICE¶ÔÏó
+        private WDC_DEVICE m_wdcDevice = new WDC_DEVICE();   //å®šä¹‰ä¸€ä¸ªå†…éƒ¨çš„wed_DEVICEå¯¹è±¡
         protected MarshalWdcDevice m_wdcDeviceMarshaler;
         private USER_EVENT_CALLBACK m_userEventHandler;
         private USER_INTERRUPT_CALLBACK m_userIntHandler;
@@ -39,7 +39,7 @@ namespace Jungo.pcie_lib
         /* constructors & destructors */
         internal protected PCIE_Device(WD_PCI_SLOT slot): this(0, 0, slot){}
 
-        internal protected PCIE_Device(DWORD dwVendorId, DWORD dwDeviceId,//¹¹Ôìº¯Êı
+        internal protected PCIE_Device(DWORD dwVendorId, DWORD dwDeviceId,//æ„é€ å‡½æ•°
             WD_PCI_SLOT slot)
         {
             m_wdcDevice = new WDC_DEVICE();
@@ -63,7 +63,7 @@ namespace Jungo.pcie_lib
          *  properties       *
          *********************/
 
-        public IntPtr Handle//Éè±¸µÄ¾ä±ú
+        public IntPtr Handle//è®¾å¤‡çš„å¥æŸ„
         {
             get
             {
@@ -99,7 +99,7 @@ namespace Jungo.pcie_lib
             }
         }
 
-        public WD_PCI_SLOT slot    //https://www.cnblogs.com/DannyShi/p/4475726.html ¶¨ÒåÊôĞÔ ÓÃÓÚ°²È«µÄ·ÃÎÊÖØÒªµÄÊı¾İ ÈçË½ÓĞÊı¾İ
+        public WD_PCI_SLOT slot    //https://www.cnblogs.com/DannyShi/p/4475726.html å®šä¹‰å±æ€§ ç”¨äºå®‰å…¨çš„è®¿é—®é‡è¦çš„æ•°æ® å¦‚ç§æœ‰æ•°æ®
         {
             get
             {
@@ -168,7 +168,7 @@ namespace Jungo.pcie_lib
 
         public string ToString(BOOL bLong)
         {
-            return (bLong)? m_sDeviceLongDesc: m_sDeviceShortDesc;//×°»» Ê¹ÓÃÄÄÖÖÃèÊö·½·¨
+            return (bLong)? m_sDeviceLongDesc: m_sDeviceShortDesc;//è£…æ¢ ä½¿ç”¨å“ªç§æè¿°æ–¹æ³•
         }
 
         public bool IsMySlot(ref WD_PCI_SLOT slot)
@@ -197,18 +197,18 @@ namespace Jungo.pcie_lib
 
         /* private methods */
 
-        private bool DeviceValidate()  //µØÖ·¿Õ¼äÊÇ·ñ´æÔÚ
+        private bool DeviceValidate()  //åœ°å€ç©ºé—´æ˜¯å¦å­˜åœ¨
         {
             DWORD i, dwNumAddrSpaces = m_wdcDevice.dwNumAddrSpaces;
 
-            /* NOTE: You can modify the implementation of this function in     *×¢Òâ£ºÄú¿ÉÒÔĞŞ¸Ä´Ë¹¦ÄÜµÄÊµÊ©£¬ÒÔÑéÖ¤Éè±¸ÊÇ·ñ¾ßÓĞÄúÆÚÍûÕÒµ½µÄ×ÊÔ´
+            /* NOTE: You can modify the implementation of this function in     *æ³¨æ„ï¼šæ‚¨å¯ä»¥ä¿®æ”¹æ­¤åŠŸèƒ½çš„å®æ–½ï¼Œä»¥éªŒè¯è®¾å¤‡æ˜¯å¦å…·æœ‰æ‚¨æœŸæœ›æ‰¾åˆ°çš„èµ„æº
              * order to verify that the device has the resources you expect to *
              * find */
 
             /* Verify that the device has at least one active address space */
             for (i = 0; i < dwNumAddrSpaces; i++)
             {
-                if (wdc_lib_decl.WDC_AddrSpaceIsActive(Handle, i))  //¼ì²éÊÇ·ñÓĞBAR¿Õ¼ä
+                if (wdc_lib_decl.WDC_AddrSpaceIsActive(Handle, i))  //æ£€æŸ¥æ˜¯å¦æœ‰BARç©ºé—´
                     return true;
             }
 
@@ -227,18 +227,18 @@ namespace Jungo.pcie_lib
 
         /* public methods */
 
-        public virtual DWORD Open()//pcieÀà·½·¨
+        public virtual DWORD Open()//pcieç±»æ–¹æ³•
         {
             DWORD dwStatus;
-            WD_PCI_CARD_INFO deviceInfo = new WD_PCI_CARD_INFO();//¶¨ÒåÒ»¸öÉè±¸Êı¾İÀà
-            //¼ìË÷Éè±¸Ô´ĞÅÏ¢
+            WD_PCI_CARD_INFO deviceInfo = new WD_PCI_CARD_INFO();//å®šä¹‰ä¸€ä¸ªè®¾å¤‡æ•°æ®ç±»
+            //æ£€ç´¢è®¾å¤‡æºä¿¡æ¯
             /* Retrieve the device's resources information */
             deviceInfo.pciSlot = slot;
-            dwStatus = wdc_lib_decl.WDC_PciGetDeviceInfo(deviceInfo);//µ÷ÓÃAPI »ñµÃ×´Ì¬ĞÅÏ¢
-            if ((DWORD)wdc_err.WD_STATUS_SUCCESS != dwStatus)//Èç¹û²»³É¹¦
+            dwStatus = wdc_lib_decl.WDC_PciGetDeviceInfo(deviceInfo);//è°ƒç”¨API è·å¾—çŠ¶æ€ä¿¡æ¯
+            if ((DWORD)wdc_err.WD_STATUS_SUCCESS != dwStatus)//å¦‚æœä¸æˆåŠŸ
             {
                 Log.ErrLog("PCIE_Device.Open: Failed retrieving the " 
-                    + "device's resources information. Error 0x" + //ÔÚlogÖĞ´òÓ¡Êı¾İ
+                    + "device's resources information. Error 0x" + //åœ¨logä¸­æ‰“å°æ•°æ®
                     dwStatus.ToString("X") + ": " + utils.Stat2Str(dwStatus) +
                     "(" + this.ToString(false) +")" );
                 return dwStatus;
@@ -249,14 +249,14 @@ namespace Jungo.pcie_lib
              * items number - deviceInfo.Card.dwItems) in order to register
              * only some of the resources or register only a portion of a
              * specific address space, for example. 
-             ×¢Òâ£ºÈç¹ûĞèÒª£¬Äú¿ÉÒÔÔÚ´Ë´¦ĞŞ¸ÄÉè±¸µÄ×ÊÔ´ĞÅÏ¢£¨Ö÷ÒªÊÇdeviceInfo.Card.ItemsÊı×é»òÏîÄ¿±àºÅ - deviceInfo.Card.dwItems£©£¬
-             ÒÔ½ö×¢²áÒ»Ğ©×ÊÔ´»ò½ö×¢²áÌØ¶¨²¿·Ö µØÖ·¿Õ¼ä£¬ÀıÈç¡£
+             æ³¨æ„ï¼šå¦‚æœéœ€è¦ï¼Œæ‚¨å¯ä»¥åœ¨æ­¤å¤„ä¿®æ”¹è®¾å¤‡çš„èµ„æºä¿¡æ¯ï¼ˆä¸»è¦æ˜¯deviceInfo.Card.Itemsæ•°ç»„æˆ–é¡¹ç›®ç¼–å· - deviceInfo.Card.dwItemsï¼‰ï¼Œ
+             ä»¥ä»…æ³¨å†Œä¸€äº›èµ„æºæˆ–ä»…æ³¨å†Œç‰¹å®šéƒ¨åˆ† åœ°å€ç©ºé—´ï¼Œä¾‹å¦‚ã€‚
              */
 
             dwStatus = wdc_lib_decl.WDC_PciDeviceOpen(ref m_wdcDevice,
-                deviceInfo, IntPtr.Zero, IntPtr.Zero, "", IntPtr.Zero);//×´Ì¬Õı³£Ö®ºó³¢ÊÔ´ò¿ª
+                deviceInfo, IntPtr.Zero, IntPtr.Zero, "", IntPtr.Zero);//çŠ¶æ€æ­£å¸¸ä¹‹åå°è¯•æ‰“å¼€
 
-            if ((DWORD)wdc_err.WD_STATUS_SUCCESS != dwStatus)//Èç¹û´ò¿ªÊ§°Ü
+            if ((DWORD)wdc_err.WD_STATUS_SUCCESS != dwStatus)//å¦‚æœæ‰“å¼€å¤±è´¥
             {
                 Log.ErrLog("PCIE_Device.Open: Failed opening a " +
                     "WDC device handle. Error 0x" + dwStatus.ToString("X") +
@@ -266,9 +266,9 @@ namespace Jungo.pcie_lib
             }
 
             Log.TraceLog("PCIE_Device.Open: Opened a PCI device " + 
-                this.ToString(false));//¸üĞÂ ³É¹¦´ò¿ª µ÷ÓÃtostring·½·¨
+                this.ToString(false));//æ›´æ–° æˆåŠŸæ‰“å¼€ è°ƒç”¨tostringæ–¹æ³•
 
-            /* Validate device information *///ÑéÖ¤ĞÅÏ¢ µØÖ·¿Õ¼äÊÇ·ñ´æÔÚ
+            /* Validate device information *///éªŒè¯ä¿¡æ¯ åœ°å€ç©ºé—´æ˜¯å¦å­˜åœ¨
             if (DeviceValidate() != true)
             {
                 dwStatus = (DWORD)wdc_err.WD_NO_RESOURCES_ON_DEVICE;
@@ -283,10 +283,10 @@ Error:
             return dwStatus;
         }
 
-        public virtual bool Close()//¹Ø±Õ
+        public virtual bool Close()//å…³é—­
         {
             DWORD dwStatus;
-            //HandleÊÇÊôĞÔ
+            //Handleæ˜¯å±æ€§
             if (Handle == IntPtr.Zero)
             {
                 Log.ErrLog("PCIE_Device.Close: Error - NULL " 
@@ -294,13 +294,13 @@ Error:
                 return false;
             }
 
-            /* unregister events*///×¢ÏúÊÂ¼ş
+            /* unregister events*///æ³¨é”€äº‹ä»¶
             dwStatus = EventUnregister();
 
-            /* Disable interrupts *///ÖĞ¶ÏÖĞ¶Ï
+            /* Disable interrupts *///ä¸­æ–­ä¸­æ–­
             dwStatus = DisableInterrupts();
 
-            /* Close the device *///¹Ø±ÕÉè±¸
+            /* Close the device *///å…³é—­è®¾å¤‡
             dwStatus = wdc_lib_decl.WDC_PciDeviceClose(Handle);
             if ((DWORD)wdc_err.WD_STATUS_SUCCESS != dwStatus)
             {
@@ -546,14 +546,14 @@ Error:
         {
             DWORD dwStatus;
 
-            if (!wdc_lib_decl.WDC_EventIsRegistered(Handle))//¼ì²éÉè±¸ÊÇ·ñ±»×¢²á ²Î¼ûÎÄµµ
+            if (!wdc_lib_decl.WDC_EventIsRegistered(Handle))//æ£€æŸ¥è®¾å¤‡æ˜¯å¦è¢«æ³¨å†Œ å‚è§æ–‡æ¡£
             {
                 Log.ErrLog("PCIE_Device.EventUnregister: No events " +
                     "currently registered ...(" + this.ToString(false) + ")" );
                 return (DWORD)wdc_err.WD_OPERATION_ALREADY_DONE;
             }
 
-            dwStatus = wdc_lib_decl.WDC_EventUnregister(m_wdcDevice);//×¢ÏúÊÂ¼ş
+            dwStatus = wdc_lib_decl.WDC_EventUnregister(m_wdcDevice);//æ³¨é”€äº‹ä»¶
 
             if ((DWORD)wdc_err.WD_STATUS_SUCCESS != dwStatus)
             {

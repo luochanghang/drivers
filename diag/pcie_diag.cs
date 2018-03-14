@@ -20,7 +20,7 @@ using WDC_DEVICE_HANDLE = System.IntPtr;
 using WDC_ADDR_SIZE = System.UInt32;
 using HANDLE = System.IntPtr;
 
-namespace Jungo.pcie_diag//定义命名空间
+namespace Jungo.pcie_diag//定义命名空间    更改
 {
     public enum RW//读写数字定义
     {
