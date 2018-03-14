@@ -1,0 +1,14 @@
+# The sources for the pcie device driver:
+
+TARGETNAME=pcie
+TARGETTYPE=DRIVER
+TARGETPATH=obj
+NO_SAFESEH=1
+INCLUDES=$(WD_BASEDIR)\include;$(WD_BASEDIR)
+TARGETLIBS= \
+    c:\windriver\lib\windrvr6.lib \
+    $(DDK_LIB_PATH)\hotpatch.obj\
+$(DDK_LIB_PATH)\BufferOverflowK.lib\
+$(DDK_LIB_PATH)\hal.lib \$(DDK_LIB_PATH)\ntoskrnl.lib \
+$(DDK_LIB_PATH)\usbd.lib
+SOURCES= pcie.rc

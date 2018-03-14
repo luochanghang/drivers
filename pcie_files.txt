@@ -1,0 +1,33 @@
+The DriverWizard has created:
+* A sample diagnostics application for testing the communication with
+  your hardware from the user mode.
+* Library files, which include API for controling your hardware.
+  C:/Users/Administrator/Desktop/pcie driver/1881818/pcie_files.txt
+         A detailed overview of all the generated files.
+
+  C:/Users/Administrator/Desktop/pcie driver/1881818/lib/
+         The folder containing the pci dotnet library source code 
+
+  C:/Users/Administrator/Desktop/pcie driver/1881818/diag/PCIE_diag.cs
+         The sample user-mode application which diagnoses your
+         hardware using the pci dotnet library .
+
+  C:/Users/Administrator/Desktop/pcie driver/1881818/pcie_msdev_2008_AMD64.sln
+         Microsoft Developer Studio (.NET 2008) Solution File for the
+         AMD 64 Bit Platform.
+
+  C:/Users/Administrator/Desktop/pcie driver/1881818/diag/pcie_diag_msdev_2008AMD64.csproj.
+         Microsoft Developer Studio (.NET 2008) Project File for the
+         AMD 64 Bit Platform.
+
+  C:/Users/Administrator/Desktop/pcie driver/1881818/lib/pcie_lib_msdev_2008AMD64.csproj.
+         Microsoft Developer Studio (.NET 2008) Project File for the
+         AMD 64 Bit Platform.
+
+  C:/Users/Administrator/Desktop/pcie driver/1881818/pcie.inf
+         A formatted reference file for Windows that contains
+         information about installation files and devices, such as
+         filenames, version information and so on.
+
+Compiling this project:
+  For MSDEV.NET, open Visual Studio .NET, load the project file and compile
