@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Drawing;
 using System.Collections;
 using System.ComponentModel;
@@ -20,22 +20,22 @@ using WDC_DEVICE_HANDLE = System.IntPtr;
 using WDC_ADDR_SIZE = System.UInt32;
 using HANDLE = System.IntPtr;
 
-namespace Jungo.pcie_diag//¶¨ÒåÃüÃû¿Õ¼ä
+namespace Jungo.pcie_diag//å®šä¹‰å‘½åç©ºé—´
 {
-    public enum RW//¶ÁĞ´Êı×Ö¶¨Òå
+    public enum RW//è¯»å†™æ•°å­—å®šä¹‰
     {
         READ = 0,
         WRITE = 1,
         READ_ALL = 2
     }
 
-    public enum TRANSFER_TYPE//´«Êä¶¨Òå
+    public enum TRANSFER_TYPE//ä¼ è¾“å®šä¹‰
     {
         BLOCK = 0,
         NONBLOCK = 1
     }
 
-    public enum ACTION_TYPE //¶¯×÷ÀàĞÍ¶¨Òå
+    public enum ACTION_TYPE //åŠ¨ä½œç±»å‹å®šä¹‰
     {
         CFG = 0,
         RT = 1,        
@@ -44,9 +44,9 @@ namespace Jungo.pcie_diag//¶¨ÒåÃüÃû¿Õ¼ä
     public class PCIE_diag : System.Windows.Forms.Form
     {
         private IContainer components;
-        private PCIE_DeviceList pciDevList;//Éè±¸ÁĞ±íÓĞ¹Ø
+        private PCIE_DeviceList pciDevList;//è®¾å¤‡åˆ—è¡¨æœ‰å…³
         private Log log;
-        //Éè±¸´°¿Ú°´¼ü¶¨Òå
+        //è®¾å¤‡çª—å£æŒ‰é”®å®šä¹‰
         private System.Windows.Forms.TextBox txtLog;
         private System.Windows.Forms.MainMenu mainMenu1;
         private System.Windows.Forms.MenuItem menuAddrSpaces;
@@ -72,13 +72,13 @@ namespace Jungo.pcie_diag//¶¨ÒåÃüÃû¿Õ¼ä
 
         private System.Windows.Forms.Button btDevice;
         
-        public PCIE_diag()    //Ä¬ÈÏ¹¹Ôì·½·¨
+        public PCIE_diag()    //é»˜è®¤æ„é€ æ–¹æ³•
         {
-            InitializeComponent();  //pcie_diag ´°¿Ú³õÊ¼»¯·½·¨
-            //ÊµÀı»¯Î¯ÍĞ  delegate ac = new delegate(TraceLog) ÄÇÃ´ ac¾Í´ú±íTraceLogº¯Êı 
+            InitializeComponent();  //pcie_diag çª—å£åˆå§‹åŒ–æ–¹æ³•
+            //å®ä¾‹åŒ–å§”æ‰˜  delegate ac = new delegate(TraceLog) é‚£ä¹ˆ acå°±ä»£è¡¨TraceLogå‡½æ•° 
             log = new Log(new Log.TRACE_LOG(TraceLog),
-                new Log.ERR_LOG(ErrLog));  //½«logµÄÊµÏÖ·½·¨´«ÈëLogÀàÖĞ
-            pciDevList = PCIE_DeviceList.TheDeviceList();     //»ñÈ¡Éè±¸ÁĞ±í¶ÔÏó
+                new Log.ERR_LOG(ErrLog));  //å°†logçš„å®ç°æ–¹æ³•ä¼ å…¥Logç±»ä¸­
+            pciDevList = PCIE_DeviceList.TheDeviceList();     //è·å–è®¾å¤‡åˆ—è¡¨å¯¹è±¡
         }
 
         protected override void Dispose( bool disposing )
@@ -300,20 +300,20 @@ namespace Jungo.pcie_diag//¶¨ÒåÃüÃû¿Õ¼ä
 
         /// The main entry point for the application.
         [STAThread]
-            static void Main() //³ÌĞòÈë¿Ú
+            static void Main() //ç¨‹åºå…¥å£
             {
                 Application.Run(new PCIE_diag());
             }
 
 
         /* Open a handle to a device */
-        private bool DeviceOpen(int iSelectedIndex)  //ÅĞ¶ÏÉè±¸ÊÇ·ñ¿ªÆô³É¹¦
+        private bool DeviceOpen(int iSelectedIndex)  //åˆ¤æ–­è®¾å¤‡æ˜¯å¦å¼€å¯æˆåŠŸ
         {
             DWORD dwStatus;
-            PCIE_Device device = pciDevList.Get(iSelectedIndex);//»ñµÃµ±Ç°Éè±¸
+            PCIE_Device device = pciDevList.Get(iSelectedIndex);//è·å¾—å½“å‰è®¾å¤‡
 
             /* Open a handle to the device */
-            dwStatus = device.Open();//¿ªÆôÉè±¸ »ñÈ¡Éè±¸×´Ì¬ĞÅÏ¢ 
+            dwStatus = device.Open();//å¼€å¯è®¾å¤‡ è·å–è®¾å¤‡çŠ¶æ€ä¿¡æ¯ 
             if (dwStatus != (DWORD)wdc_err.WD_STATUS_SUCCESS)
             {
                 Log.ErrLog("PCIE_diag.DeviceOpen: Failed opening a " +
@@ -448,7 +448,7 @@ Error:
         {
             btDevice_Click(sender, e);
         }
-    /* device button */   //´ò¿ªÉè±¸°´¼ü´¦Àíº¯Êı
+    /* device button */   //æ‰“å¼€è®¾å¤‡æŒ‰é”®å¤„ç†å‡½æ•°
         private void btDevice_Click(object sender, System.EventArgs e)
         {
             if(btDevice.Text == "Open Device")
@@ -605,16 +605,16 @@ Error:
             txtLog.Clear();
         }                                                
 
-        public void LogFunc(string str)  //logÊı¾İ¸üĞÂÊµÏÖ·½·¨
+        public void LogFunc(string str)  //logæ•°æ®æ›´æ–°å®ç°æ–¹æ³•
         {
             if(txtLog != null)
-                txtLog.Text += str + Environment.NewLine;//ÔÚlogÀïÃæ¼ÓÊı¾İ
+                txtLog.Text += str + Environment.NewLine;//åœ¨logé‡Œé¢åŠ æ•°æ®
         }
 
-        public void TraceLog(string str)//tracelogÊµÏÖ·½·¨
+        public void TraceLog(string str)//tracelogå®ç°æ–¹æ³•
         {
             if(this.InvokeRequired)
-                Invoke(new Log.TRACE_LOG(LogFunc), new object[]{str});//Ïß³ÌÎÊÌâ Ö÷ÒªÊÇÓÃÓÚ»ØËİ»æÖÆ´°ÌåµÄÏß³Ì
+                Invoke(new Log.TRACE_LOG(LogFunc), new object[]{str});//çº¿ç¨‹é—®é¢˜ ä¸»è¦æ˜¯ç”¨äºå›æº¯ç»˜åˆ¶çª—ä½“çš„çº¿ç¨‹
             else
                 LogFunc(str);
         }
